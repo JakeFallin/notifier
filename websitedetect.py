@@ -11,6 +11,7 @@ import secretkey
 def main(): 
     print("Hello")
     url = secretkey.url   
+    ifttt("Starting the scraper!")
     bot(url)
 
 def ifttt(val): 
