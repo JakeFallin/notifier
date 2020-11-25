@@ -4,28 +4,27 @@ import hashlib
 from lxml import html
 from time import sleep
 import datetime
-from win10toast import ToastNotifier
-from ipaddress import IPv4Address
-from pyairmore.request import AirmoreSession
-from pyairmore.services.messaging import MessagingService
+# from win10toast import ToastNotifier
+# from ipaddress import IPv4Address
+# from pyairmore.request import AirmoreSession
+# from pyairmore.services.messaging import MessagingService
 
-def main(): {
+def main(): 
     print("Hello")
     url = "https://ineedhemp.com/product-category/v4/"   
     bot(url)
-}
 
 
-def sendText(message): {
 
-    mobileNumber ="2018358030"
-    textMessage = message
-    androidIP = IPv4Address("192.xx.xx.xx")
-    androidSession = AirmoreSession(androidIP)
-    print(androidSession.is_server_running)
-    smsService = MessagingService(androidSession)
-    smsService.send_message(“mobileNumber,textMessage”)
-}
+# def sendText(message): 
+
+#     mobileNumber ="2018358030"
+#     textMessage = message
+#     androidIP = IPv4Address("192.xx.xx.xx")
+#     androidSession = AirmoreSession(androidIP)
+#     print(androidSession.is_server_running)
+#     smsService = MessagingService(androidSession)
+#     smsService.send_message(mobileNumber, textMessage)
 
 
 def hash(text):
@@ -68,13 +67,12 @@ def bot(url):
 
         if diff:
             print("No Change")
-            sendText("No Change")
             # toaster = ToastNotifier()
             # toaster.show_toast( "INEEDHEMP HAS BEEN UPDATED!", "go buy shit", icon_path = None, duration = 60)
             # while toaster.notification_active(): sleep(400)
         else:
             print("THIS IS NOT A DRILL GOOOOOOO")
-            sendText("BUYBUYBUY")
+
         
         now = datetime.datetime.now()
         print("Current date and time : ")
