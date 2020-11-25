@@ -8,28 +8,10 @@ from ifttt_webhook import IftttWebhook
 
 import secretkey
 
-
-# from win10toast import ToastNotifier
-# from ipaddress import IPv4Address
-# from pyairmore.request import AirmoreSession
-# from pyairmore.services.messaging import MessagingService
-
 def main(): 
     print("Hello")
-    url = "https://ineedhemp.com/product-category/v4/"   
+    url = secretkey.url   
     bot(url)
-
-
-
-# def sendText(message): 
-
-#     mobileNumber ="2018358030"
-#     textMessage = message
-#     androidIP = IPv4Address("192.xx.xx.xx")
-#     androidSession = AirmoreSession(androidIP)
-#     print(androidSession.is_server_running)
-#     smsService = MessagingService(androidSession)
-#     smsService.send_message(mobileNumber, textMessage)
 
 def ifttt(val): 
     IFTTT_KEY = secretkey.IFTTT_KEY
@@ -46,7 +28,6 @@ def hash(text):
 def tree(contents):
     return html.fromstring(contents)
 
-
 def compareTrees(tree1, tree2):
     oos1 = '//*[@id="main"]/div/div/div/div[3]/div[8]/div/div[2]/div[1]/div[5]/text()'
     oos2 = '//*[@id="main"]/div/div/div/div[3]/div[9]/div/div[2]/div[1]/div[5]/text()'
@@ -62,7 +43,6 @@ def compareTrees(tree1, tree2):
     else:
         return False
 
-
 def bot(url):
 
     page = requests.get(url)
@@ -72,7 +52,6 @@ def bot(url):
         pageUpdated = requests.get(url)
         treeUpdated = tree(pageUpdated.content)
         diff = compareTrees(treeOriginal, treeUpdated)
-
 
         if diff:
             print("No Change")
