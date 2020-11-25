@@ -4,6 +4,11 @@ import hashlib
 from lxml import html
 from time import sleep
 import datetime
+from ifttt_webhook import IftttWebhook
+
+import secretkey
+
+
 # from win10toast import ToastNotifier
 # from ipaddress import IPv4Address
 # from pyairmore.request import AirmoreSession
@@ -26,6 +31,10 @@ def main():
 #     smsService = MessagingService(androidSession)
 #     smsService.send_message(mobileNumber, textMessage)
 
+def ifttt(val): 
+    IFTTT_KEY = secretkey.IFTTT_KEY
+    ifttt = IftttWebhook(IFTTT_KEY)
+    ifttt.notification(title='tacobellisawayoflife420notification', message=val)
 
 def hash(text):
 
@@ -55,32 +64,32 @@ def compareTrees(tree1, tree2):
 
 
 def bot(url):
+
     page = requests.get(url)
-    #original = hash(page.text)
     treeOriginal = tree(page.content)
+    count = 0
     while True:
         pageUpdated = requests.get(url)
-        #updated = hash(pageUpdated.text)
         treeUpdated = tree(pageUpdated.content)
         diff = compareTrees(treeOriginal, treeUpdated)
 
 
         if diff:
             print("No Change")
-            # toaster = ToastNotifier()
-            # toaster.show_toast( "INEEDHEMP HAS BEEN UPDATED!", "go buy shit", icon_path = None, duration = 60)
-            # while toaster.notification_active(): sleep(400)
         else:
             print("THIS IS NOT A DRILL GOOOOOOO")
+            ifttt("time to buy!!!!!!!!")
 
-        
         now = datetime.datetime.now()
         print("Current date and time : ")
         print(now.strftime("%Y-%m-%d %H:%M:%S"))
-        
-        
-        sleep(60)
+        if count <= 20 :
+            count = count + 1
+        else :
+            count = 0
+            ifttt("healthy, there has been no change in the last hour")
 
+        sleep(300)
 
 
 main()
